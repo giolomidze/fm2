@@ -33,7 +33,7 @@
 
         <?php foreach ($this->composer->menu_data() as $menu) : ?>
             <li>
-                <a href="<?php echo BASE_URL.'/'.$this->lang.'/'.str_replace(' ', '_', strtolower($menu)); ?>">
+                <a href="<?php echo BASE_URL.'/'.$this->lang.'/'.$this->language->translate_url($menu); ?>">
                     <?php echo $menu; ?>
                 </a>
             </li>
