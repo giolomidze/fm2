@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /carry_on_my_wayward_son/
+
+RewriteRule ^(.*)/$ $1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?uri=$1 [L]
+
+</IfModule>
