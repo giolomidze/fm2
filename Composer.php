@@ -1,4 +1,5 @@
 <?php
+
 class Composer
 {
     private $db;
@@ -6,6 +7,11 @@ class Composer
     public function __construct($database)
     {
         $this->db = $database;
+    }
+
+    public function users()
+    {
+        return $this->db->get_data('user');
     }
 
     public function menu_data()

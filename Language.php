@@ -1,4 +1,5 @@
 <?php
+
 class Language
 {
     private $lang;
@@ -7,6 +8,7 @@ class Language
     {
         $this->lang = $lang;
     }
+
     public function translate($key)
     {
         $content = [
@@ -28,9 +30,9 @@ class Language
             ],
         ];
 
-        if(array_key_exists($this->lang, $content)) {
-            if(array_key_exists($key, $content[$this->lang])) {
-                    return $content[$this->lang][$key];
+        if (array_key_exists($this->lang, $content)) {
+            if (array_key_exists($key, $content[$this->lang])) {
+                return $content[$this->lang][$key];
             } else {
                 return $key;
             }
@@ -48,11 +50,16 @@ class Language
                 'login' => 'შესვლა',
                 'sign_up' => 'რეგისტრაცია',
             ],
+            'en' => [
+                'პროდუქტები' => 'products',
+                'შესვლა' => 'login',
+                'რეგისტრაცია' => 'sign_up',
+            ],
         ];
 
-        if(array_key_exists($this->lang, $content)) {
-            if(array_key_exists($keyword, $content[$this->lang])) {
-                    return $content[$this->lang][$keyword];
+        if (array_key_exists($this->lang, $content)) {
+            if (array_key_exists($keyword, $content[$this->lang])) {
+                return $content[$this->lang][$keyword];
             } else {
                 return $keyword;
             }

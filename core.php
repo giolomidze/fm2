@@ -1,36 +1,34 @@
 <?php
-if(in_array($get[0], $lang)) {
-    $first_segment = $get[1];
-} else {
-    $first_segment = $get[0];
-    // var_dump(array_key_exists($get[0], $routes));
-}
+$first_segment = $get[0];
 
-// var_dump($first_segment);
-// print_r($get);
-// var_dump($first_segment);
+// Check if the requested URI is within the routes
 
-if(array_key_exists($first_segment, $routes)) {
+if (array_key_exists($first_segment, $routes)) {
     $controller_to_call = explode('@', $routes[$first_segment]);
 
-    if(in_array($get[0], $lang)) {
-        $first_segment = $get[1];
-        $controller = new $controller_to_call[0]($get, $get[0]);
-        unset($get[0]);
-        unset($get[1]);
-    } else {
-        $first_segment = $get[0];
-        $controller = new $controller_to_call[0]($get, 'en');
-        // var_dump(array_key_exists($get[0], $routes));
-        unset($get[0]);
-    }
+    $first_segment = $get[0];
+    $controller = new $controller_to_call[0]($get);
+    unset($get[0]);
 
-    if(method_exists($controller, $controller_to_call[1])) {
-        $method = $controller_to_call[1];
-        call_user_func_array(array($controller,  $method), $get);
+    $method_to_call = explode('|', $controller_to_call[1]);
+    $request_method = $method_to_call[1]; // Get Method
+
+    if (method_exists($controller, $method_to_call[0])) {
+        $method = $method_to_call[0]; // Get Controller
+        if($request_method === $_SERVER['REQUEST_METHOD']) {
+            call_user_func_array(array($controller, $method), $get);
+        } else {
+            $message['status'] = 'bad request';
+            echo json_encode($message);
+            return http_response_code(400);
+        }
     } else {
-        echo 'no controller found';
+        $message['status'] = 'controller wasn\'t controller found';
+        echo json_encode($message);
+        return http_response_code(404);
     }
 } else {
-    echo 'route is not defined';
+        $message['status'] = 'page wasn\'t found';
+        echo json_encode($message);
+        return http_response_code(404);
 }

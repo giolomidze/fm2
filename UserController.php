@@ -1,4 +1,5 @@
 <?php
+
 class UserController extends MainController
 {
     public function login()
@@ -6,6 +7,7 @@ class UserController extends MainController
         $data['page'] = 'login_page';
         $this->view->load('master', $data);
     }
+
     public function sign_up()
     {
         $data['page'] = 'register';

@@ -1,16 +1,10 @@
 <?php
-$lang = [
-    'ka', 'en'
-];
 
 // Routes Configuration
 
 $routes = [
-    'home_page' => 'MainController@index',
-    'products' => 'ProductController@products',
-    'login' => 'UserController@login',
-    'შესვლა' => 'UserController@login',
-    'რეგისტრაცია' => 'UserController@sign_up',
-    'sign_up' => 'UserController@sign_up',
-    'პროდუქტები' => 'ProductController@products',
+    'home_page' => 'MainController@index|GET',
+    'test_page' => 'TestController@test|GET',
+    'test_page2' => 'TestController@update|POST',
+    'test2' => 'TestController@update|POST',
 ];

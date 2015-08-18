@@ -1,16 +1,26 @@
 <?php
-class DB
+
+class DB extends PDO
 {
-    public function somedata()
+    const DB_HOST = 'localhost';
+    const DB_USER = 'root';
+    const DB_PASS = '1234';
+    const DB_NAME = 'test_db';
+
+    function __construct()
     {
-        return ['Home Page','Login','Sign Up','Products','Sxvaravaxar'];
+        try {
+            parent::__construct("mysql:host=".self::DB_HOST.";dbname=".self::DB_NAME.";charset=utf8", self::DB_USER, self::DB_PASS);
+            parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            parent::setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
     }
-    public function products()
+
+    public function get_data($from)
     {
-        return ['MikroTik', 'TP-Link', 'D-Link'];
+        return $this->query("SELECT * FROM ".$from);
     }
-    public function get_product()
-    {
-        return ['Prod1', 'Prod2', 'Prod3'];
-    }
+
 }

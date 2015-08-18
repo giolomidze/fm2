@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 
 RewriteEngine On
-RewriteBase /carry_on_my_wayward_son/
+RewriteBase /
 
 RewriteRule ^(.*)/$ $1 [L,R=301]
 

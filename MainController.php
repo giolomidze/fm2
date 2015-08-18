@@ -1,20 +1,19 @@
 <?php
+
 class MainController
 {
     protected $uri;
     protected $db;
     protected $view;
     protected $composer;
-    protected $lang;
-    protected $translate;
 
-    public function __construct($uri, $lang)
+    public function __construct($uri)
     {
-        $this->lang = $lang;
         $this->uri = $uri;
         $this->db = new DB();
-        $this->view = new View(new Composer($this->db), $this->lang, new Language($this->lang));
+        $this->view = new View(new Composer($this->db));
     }
+
     public function index()
     {
         $this->view->load('master');
