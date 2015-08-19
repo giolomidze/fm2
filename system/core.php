@@ -1,4 +1,5 @@
 <?php
+$session = new Session();
 $first_segment = $get[0];
 
 // Check if the requested URI is within the routes

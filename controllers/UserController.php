@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends MainController
+class UserController extends Controller
 {
     public function login()
     {

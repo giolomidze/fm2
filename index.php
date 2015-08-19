@@ -1,11 +1,16 @@
 <?php
-define('CLASS_DIR', '');
+require_once 'constants.php';
 
-set_include_path(getcwd() . PATH_SEPARATOR . CLASS_DIR);
-
-spl_autoload_extensions('.php');
-
-spl_autoload_register();
+function __autoload($class)
+{
+    $folders = ['system', 'controllers'];
+    foreach ($folders as $folder) {
+        $filepath = getcwd().DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$class.'.php';
+        if(file_exists($filepath)) {
+            require_once $filepath;
+        }
+    }
+}
 
 if (isset($_GET['uri'])) {
     $get = $_GET['uri'];
@@ -15,6 +20,5 @@ if (isset($_GET['uri'])) {
 
 $get = explode('/', $get);
 
-require_once 'constants.php';
 require_once 'routes.php';
-require_once 'core.php';
+require_once 'system/core.php';
